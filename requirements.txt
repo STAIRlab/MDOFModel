@@ -1,1 +1,5 @@
 opensees>=0.0.65
+matplotlib
+pandas
+numpy
+sees
