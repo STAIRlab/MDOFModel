@@ -8,6 +8,7 @@
 from ctypes import Union
 import matplotlib.pyplot as plt
 from cmath import pi
+import opensees.openseespy as ops
 from opensees.openseespy import *
 import pandas as pd
 import numpy as np
