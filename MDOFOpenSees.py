@@ -81,6 +81,8 @@ class MDOFOpenSees():
         # 
         # Returns:
         # Iffinish, currentDisp
+
+        model = self.model
         
         if ifprint:
             print('Pushover analysis of a MDOF lumped-mass building model with OpenSees...')
@@ -95,7 +97,7 @@ class MDOFOpenSees():
         # Create nodal loads
         #    nd    FX  FY  MZ
         for i in range(1,self.NStories+1):
-            load(i, i, 0.0, 0.0)
+            model.load(i, i, 0.0, 0.0)
 
         # recorders
         outputdir = Path(self.outputdir).relative_to(Path.cwd())
@@ -299,17 +301,18 @@ class MDOFOpenSees():
         # define building model
 
         wipe()			
-        model('basic', '-ndm', 2, '-ndf', 3)
+        model = self.model = ops.Model(ndm=2, ndf=3)
+        
 
         storyLength = 1.0
 
         # node
-        node(0, 0., 0.)
-        fix(0, 1, 1, 1) 
+        model.node(0, 0., 0.)
+        model.fix(0, 1, 1, 1) 
         for i in range(self.NStories):
-            node(i+1, (i+1)*storyLength, 0.)
-            mass(i+1, self.m[i], 0., 0.)
-            fix(i+1, 0, 1, 1) 
+            model.node(i+1, (i+1)*storyLength, 0.)
+            model.mass(i+1, self.m[i], 0., 0.)
+            model.fix(i+1, 0, 1, 1) 
         
         # material
         E = 1.0
