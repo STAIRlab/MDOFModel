@@ -1,5 +1,7 @@
-opensees>=0.0.65
+opensees>=0.0.68
 matplotlib
 pandas
 numpy
 sees
+mdof
+
