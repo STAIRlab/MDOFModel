@@ -2,6 +2,6 @@ opensees>=0.0.68
 matplotlib
 pandas
 numpy
-sees
+xara
 mdof
 
